@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%; 
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-primary/20 selection:text-white;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)] rounded-lg;
+  }
+  
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10 rounded-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-primary {
+    @apply bg-gradient-to-br from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 py-20;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-10 text-blue-400;
+  }
+
+  .interactive-button {
+    @apply relative overflow-hidden bg-primary/20 hover:bg-primary/30 text-white py-2 px-4 rounded-lg transition-all duration-300 border border-primary/40 hover:border-primary/80;
+    transform-origin: center;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .interactive-button:active {
+    transform: scale(0.95);
+    animation: button-bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .interactive-button::before {
+    @apply content-[''] absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 transform -translate-x-full;
+    transition: transform 0.6s ease;
+  }
+  
+  .interactive-button:hover::before {
+    @apply transform translate-x-full;
+  }
+
+  .interactive-card {
+    @apply glass-card p-6 hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-[1.01] hover:border-primary/30;
+  }
+
+  .highlight-text {
+    @apply text-white;
+  }
+  
+  .circle-glow {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 70%);
+    z-index: 50;
+    pointer-events: none;
+    will-change: transform;
+    transform: translate(-100px, -100px); /* Initial position */
+  }
+
+  /* Button and element bounce animations */
+  button, a.interactive-button {
+    transform-origin: center;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  button:active, a.interactive-button:active {
+    transform: scale(0.95);
+    animation: button-bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Enhanced button bounce animation */
+  [data-bounce="true"] {
+    animation: button-bounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Navigation link bounce animation */
+  @keyframes nav-bounce {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.15);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animate-nav-bounce {
+    animation: nav-bounce 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  /* Nav link styles */
+  .nav-link {
+    position: relative;
+    transform-origin: center;
+  }
+
+  /* Headings with blue color */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-blue-400;
+  }
+
+  /* Experience tile styles */
+  .experience-tile {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .experience-tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    padding: 2px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6, #8b5cf6);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .experience-tile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #a855f7, #3b82f6, #a855f7);
+    border-radius: 0.5rem 0.5rem 0 0;
+    opacity: 0.8;
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  }
+
+  .experience-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 25px -3px rgba(0, 0, 0, 0.2),
+      0 4px 6px -2px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .experience-tile:hover::before {
+    opacity: 0.8;
+  }
+
+  .experience-tile:hover::after {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
+  }
+
+  .experience-tile-active {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
+    box-shadow: 
+      0 10px 25px -3px rgba(139, 92, 246, 0.2),
+      0 4px 6px -2px rgba(59, 130, 246, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .experience-tile-active::before {
+    opacity: 1;
+  }
+
+  .experience-tile-active::after {
+    opacity: 1;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
+  }
+
+  .experience-tile-inactive {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 100%);
+  }
+
+  .experience-tile-inactive:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.05) 100%);
+  }
+}
+
+@keyframes button-bounce {
+  0% {
+    transform: scale(0.95);
+  }
+  40% {
+    transform: scale(1.02);
+  }
+  80% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary/30;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/70;
+}
