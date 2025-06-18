@@ -173,83 +173,60 @@
   /* Experience tile styles */
   .experience-tile {
     position: relative;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 100%);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(20, 20, 30, 0.75);
+    border-radius: 1.25rem;
+    border: 2px solid transparent;
+    border-image: linear-gradient(120deg, #6d4aff 10%, #a855f7 40%, #3b82f6 90%) 1;
+    box-shadow:
+      0 2px 24px 0 rgba(64, 0, 128, 0.18),
+      0 0 32px 2px #a855f7cc,
+      0 0 32px 2px #3b82f6cc;
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    overflow: visible;
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), border-color 0.3s;
   }
 
   .experience-tile::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 0.5rem;
-    padding: 2px;
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6, #8b5cf6);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
+    border-radius: 1.25rem;
+    pointer-events: none;
+    z-index: 1;
+    /* Subtle inner glow for glass effect */
+    box-shadow:
+      0 0 32px 8px #a855f733,
+      0 0 32px 8px #3b82f633;
+    opacity: 0.5;
   }
 
   .experience-tile::after {
+    /* Neon corner glow, top-right and bottom-left */
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #a855f7, #3b82f6, #a855f7);
-    border-radius: 0.5rem 0.5rem 0 0;
-    opacity: 0.8;
-    filter: blur(1px);
-    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 1.25rem;
+    top: -8px;
+    right: -8px;
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle at 80% 20%, #a855f7cc 0%, transparent 80%);
+    opacity: 0.7;
+    filter: blur(4px);
   }
 
-  .experience-tile:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 10px 25px -3px rgba(0, 0, 0, 0.2),
-      0 4px 6px -2px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-
-  .experience-tile:hover::before {
-    opacity: 0.8;
-  }
-
-  .experience-tile:hover::after {
-    opacity: 1;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
-  }
-
-  .experience-tile-active {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
-    box-shadow: 
-      0 10px 25px -3px rgba(139, 92, 246, 0.2),
-      0 4px 6px -2px rgba(59, 130, 246, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .experience-tile-active::before {
-    opacity: 1;
-  }
-
-  .experience-tile-active::after {
-    opacity: 1;
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
+  .experience-tile:hover, .experience-tile-active {
+    box-shadow:
+      0 4px 32px 0 #a855f7aa,
+      0 0 48px 8px #3b82f6cc,
+      0 0 64px 16px #a855f7cc;
+    border-color: #a855f7;
   }
 
   .experience-tile-inactive {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 100%);
-  }
-
-  .experience-tile-inactive:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.05) 100%);
+    /* No extra background, just dark glass */
   }
 }
 
